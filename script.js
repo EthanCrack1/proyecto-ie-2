@@ -408,7 +408,12 @@
         // =========================================================================
         
         document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'hidden' && !quizSubmitted) {
+            // Solo terminar el quiz si el usuario está presentando (pantalla de preguntas visible)
+            if (
+                document.visibilityState === 'hidden' &&
+                !quizSubmitted &&
+                quizScreen.style.display === 'block'
+            ) {
                 clearInterval(timerInterval);
                 alert('¡Has salido de la página! El quiz se ha terminado por seguridad.');
                 displayResults();
