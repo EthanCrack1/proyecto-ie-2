@@ -128,10 +128,12 @@
 
         // Selección de rol
         document.getElementById('btn-student').addEventListener('click', () => {
-            showScreen(startScreen);
+            roleScreen.style.display = 'none';
+            startScreen.style.display = 'block';
         });
         document.getElementById('btn-professor').addEventListener('click', () => {
-            showScreen(professorScreen);
+            roleScreen.style.display = 'none';
+            professorScreen.style.display = 'block';
         });
 
         // Acceso profesor
