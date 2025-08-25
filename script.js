@@ -77,7 +77,6 @@ const quizScreen=document.getElementById('quiz-screen');
 const resultsScreen=document.getElementById('results');
 const quizContent=document.getElementById('quiz-content');
 const questionCounter=document.getElementById('question-counter');
-const progressBar=document.querySelector('.progress');
 const nextBtn=document.getElementById('next-btn');
 const scoreDisplay=document.querySelector('.score-display');
 const resultsDetails=document.getElementById('results-details');
@@ -155,7 +154,6 @@ quizContent.innerHTML=`
 </div>
 `;
 questionCounter.textContent=`Pregunta ${currentQuestionIndex+1} de ${allQuizData.length}`;
-progressBar.style.width=`${(currentQuestionIndex/allQuizData.length)*100}%`;
 
 document.querySelectorAll('.options-list li').forEach(li=>{
 li.addEventListener('click',()=>{ document.querySelectorAll('.options-list li').forEach(l=>l.classList.remove('selected')); li.classList.add('selected'); });
@@ -214,7 +212,6 @@ html+=`<strong>Puntos:</strong> ${points}/4</div>`;
 resultsDetails.innerHTML+=html;
 });
 scoreDisplay.textContent=`Puntuación Total: ${totalScore}/${allQuizData.length*4}`;
-progressBar.style.width="100%";
 
 // Guardar nota si no existe
 saveGrade(totalScore);
