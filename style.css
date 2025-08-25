@@ -10,6 +10,7 @@
     --incorrect-color: #e74c3c;    /* Red for incorrect answers */
     --card-bg: #e5e9ec;            /* A light card background */
     --light-blue: #add8e6;
+    --option-bg: #e0b0ff;           /* Morado claro para el fondo de las opciones */
 }
 
 body {
@@ -50,8 +51,8 @@ body {
     gap: 20px; /* Espacio entre los logos */
 }
 .header-logo img {
-    width: 70px; /* Ajusta el tamaño de los logos */
-    height: 70px;
+    width: 100px; /* Ajusta el tamaño de los logos */
+    height: 100px;
 }
 .quiz-status {
     display: flex;
@@ -82,7 +83,7 @@ body {
     margin-top: 25px;
 }
 .options-list li {
-    background-color: #3e3e60;
+    background-color: var(--option-bg);
     margin-bottom: 12px;
     padding: 18px;
     border-radius: 10px;
@@ -90,7 +91,7 @@ body {
     transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
     font-size: 1.1em;
     font-weight: 400;
-    color: white; /* Color de texto cambiado a blanco */
+    color: var(--text-color); /* Color de texto */
     border: 1px solid #4a4a70;
 }
 .options-list li:hover {
@@ -226,4 +227,3 @@ body {
 #leaderboard tr:nth-child(even) {
     background-color: #2a2a4a;
 }
-/* Eliminada la regla de :hover para evitar el cambio de color */
