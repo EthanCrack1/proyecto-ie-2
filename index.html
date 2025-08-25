@@ -19,12 +19,31 @@
         </div>
 
         <div id="start-screen">
-            <p style="font-weight: bold; font-size: 1.1em;">Analizador de Espectro - Evaluación Virtual</p>
-            <p>Por favor, ingresa tus datos para iniciar el quiz.</p>
-            <input type="text" id="user-name" placeholder="Nombre">
-            <input type="text" id="user-lastname" placeholder="Apellido">
-            <input type="tel" id="user-cedula" placeholder="Número de Cédula">
-            <button id="start-quiz-btn">Iniciar Quiz</button>
+            <div class="registro-box">
+                <p style="font-weight: bold; font-size: 1.2em; margin-bottom: 10px;">Analizador de Espectro - Evaluación Virtual</p>
+                <p style="margin-bottom: 20px;">Por favor, ingresa tus datos para iniciar el quiz.</p>
+                <div class="input-group">
+                    <span class="input-icon">👤</span>
+                    <input type="text" id="user-name" placeholder="Nombre">
+                </div>
+                <div class="input-group">
+                    <span class="input-icon">🧑‍💼</span>
+                    <input type="text" id="user-lastname" placeholder="Apellido">
+                </div>
+                <div class="input-group">
+                    <span class="input-icon">🆔</span>
+                    <input type="tel" id="user-cedula" placeholder="Número de Cédula">
+                </div>
+                <div class="input-group">
+                    <span class="input-icon">🏫</span>
+                    <select id="user-school">
+                        <option value="">Selecciona Escuela</option>
+                        <option value="Eléctrica">Eléctrica ⚡</option>
+                        <option value="Telecomunicaciones">Telecomunicaciones 📡</option>
+                    </select>
+                </div>
+                <button id="start-quiz-btn">Iniciar Quiz</button>
+            </div>
         </div>
 
         <div id="quiz-screen" style="display: none;">
