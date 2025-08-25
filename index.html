@@ -19,12 +19,35 @@
         </div>
 
         <div id="start-screen">
-            <p style="font-weight: bold; font-size: 1.1em;">Analizador de Espectro - Evaluación Virtual</p>
-            <p>Por favor, ingresa tus datos para iniciar el quiz.</p>
-            <input type="text" id="user-name" placeholder="Nombre">
-            <input type="text" id="user-lastname" placeholder="Apellido">
-            <input type="tel" id="user-cedula" placeholder="Número de Cédula">
-            <button id="start-quiz-btn">Iniciar Quiz</button>
+                <div class="registro-box">
+                    <div class="registro-header">
+                        <h2>Analizador de Espectro - Evaluación Virtual</h2>
+                        <p>Por favor, ingresa tus datos para iniciar el quiz.</p>
+                    </div>
+                    <form class="registro-form">
+                        <div class="input-group">
+                            <span class="input-icon"><i class="fas fa-user"></i></span>
+                            <input type="text" id="user-name" placeholder="Nombre" autocomplete="off">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-icon"><i class="fas fa-user-tie"></i></span>
+                            <input type="text" id="user-lastname" placeholder="Apellido" autocomplete="off">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-icon"><i class="fas fa-id-badge"></i></span>
+                            <input type="tel" id="user-cedula" placeholder="Número de Cédula" autocomplete="off">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-icon"><i class="fas fa-school"></i></span>
+                            <select id="user-school">
+                                <option value="">Selecciona Escuela</option>
+                                <option value="Eléctrica">Eléctrica ⚡</option>
+                                <option value="Telecomunicaciones">Telecomunicaciones 📡</option>
+                            </select>
+                        </div>
+                        <button id="start-quiz-btn" type="button">Iniciar Quiz</button>
+                    </form>
+                </div>
         </div>
 
         <div id="quiz-screen" style="display: none;">

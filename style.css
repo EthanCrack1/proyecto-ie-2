@@ -1,3 +1,126 @@
+:root {
+    --bg-color: #f0f2f5;
+    --container-bg: #ffffff;
+    --text-color: #334e68;
+    --accent-color: #2e86de;
+    --input-bg: #eaf0fa;
+    --input-border: #dbe2ef;
+    --input-icon: #334e68;
+    --button-bg: #2e86de;
+    --button-hover: #226aad;
+    --card-bg: #f4f6fa;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.quiz-container {
+    background-color: var(--container-bg);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.header-logo {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 24px;
+}
+.header-logo img {
+    height: 80px;
+    width: auto;
+}
+
+.registro-box {
+    background: var(--card-bg);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(46, 134, 222, 0.13);
+    padding: 48px 36px;
+    max-width: 480px;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.registro-header h2 {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 8px;
+}
+.registro-header p {
+    color: #4a4a70;
+    font-size: 1.1em;
+    margin-bottom: 24px;
+}
+.registro-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.input-group {
+    display: flex;
+    align-items: center;
+    background: var(--input-bg);
+    border-radius: 12px;
+    padding: 14px 20px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(46, 134, 222, 0.07);
+    border: 1px solid var(--input-border);
+}
+.input-icon {
+    font-size: 1.7em;
+    margin-right: 14px;
+    color: var(--input-icon);
+    display: flex;
+    align-items: center;
+}
+.input-group input,
+.input-group select {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 1.15em;
+    padding: 8px 0;
+    outline: none;
+    color: var(--text-color);
+}
+.input-group select {
+    font-size: 1.1em;
+}
+.registro-form button {
+    background: var(--button-bg);
+    color: #fff;
+    font-size: 1.15em;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 0;
+    margin-top: 10px;
+    box-shadow: 0 2px 8px rgba(46, 134, 222, 0.13);
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+.registro-form button:hover {
+    background: var(--button-hover);
+    box-shadow: 0 4px 16px rgba(46, 134, 222, 0.18);
+}
 
         /* Estilos generales y colores */
         :root {
