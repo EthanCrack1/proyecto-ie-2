@@ -442,11 +442,11 @@ document.addEventListener('visibilitychange', () => {
         clearInterval(timerInterval);
         quizSubmitted = true;
         alert('¡Has salido de la página! El quiz se ha terminado por seguridad.');
+        // Oculta todas las pantallas y muestra solo resultados
+        if (typeof startScreen !== 'undefined') startScreen.style.display = 'none';
+        if (typeof quizScreen !== 'undefined') quizScreen.style.display = 'none';
+        if (typeof resultsContainer !== 'undefined') resultsContainer.style.display = 'block';
         displayResults();
-        // Opcional: Ocultar todas las pantallas excepto resultados
-        if (typeof showScreen === 'function') {
-            showScreen(resultsContainer);
-        }
     }
 });
 document.addEventListener('contextmenu', event => {
