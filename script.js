@@ -83,14 +83,27 @@
         const quizDuration = 1200;
         // Límite de caracteres para la justificación (200 letras)
         const maxChars = 200;
+        // Elementos para navegación y pantallas
+        const roleScreen = document.getElementById('role-screen');
         const startScreen = document.getElementById('start-screen');
+        const professorScreen = document.getElementById('professor-screen');
+        const professorPanel = document.getElementById('professor-panel');
         const quizScreen = document.getElementById('quiz-screen');
-        // OBTENER LOS NUEVOS ELEMENTOS DEL FORMULARIO
+        const leaderboardContainer = document.getElementById('leaderboard');
+
+        // Elementos de registro estudiante
         const userNameInput = document.getElementById('user-name');
         const userLastnameInput = document.getElementById('user-lastname');
         const userCedulaInput = document.getElementById('user-cedula');
-
+        const userSchoolInput = document.getElementById('user-school');
         const startQuizBtn = document.getElementById('start-quiz-btn');
+
+        // Elementos de registro profesor
+        const profCedulaInput = document.getElementById('prof-cedula');
+        const profClaveInput = document.getElementById('prof-clave');
+        const loginProfessorBtn = document.getElementById('login-professor-btn');
+
+        // Elementos quiz y resultados
         const quizContent = document.getElementById('quiz-content');
         const questionCounter = document.getElementById('question-counter');
         const timerDisplay = document.getElementById('timer');
@@ -99,9 +112,58 @@
         const resultsContainer = document.getElementById('results');
         const resultsDetails = document.getElementById('results-details');
         const scoreDisplay = document.querySelector('.score-display');
-        const leaderboardContainer = document.getElementById('leaderboard');
         const leaderboardTableBody = document.querySelector('#leaderboard-table tbody');
         const showLeaderboardBtn = document.getElementById('show-leaderboard-btn');
+
+        // Pantallas iniciales
+        function showScreen(screen) {
+            roleScreen.style.display = 'none';
+            startScreen.style.display = 'none';
+            professorScreen.style.display = 'none';
+            professorPanel.style.display = 'none';
+            quizScreen.style.display = 'none';
+            leaderboardContainer.style.display = 'none';
+            if (screen) screen.style.display = 'block';
+        }
+
+        // Selección de rol
+        document.getElementById('btn-student').addEventListener('click', () => {
+            showScreen(startScreen);
+        });
+        document.getElementById('btn-professor').addEventListener('click', () => {
+            showScreen(professorScreen);
+        });
+
+        // Acceso profesor
+        loginProfessorBtn.addEventListener('click', () => {
+            const cedula = profCedulaInput.value.trim();
+            const clave = profClaveInput.value.trim();
+            if (!cedula || !clave) {
+                alert('Completa todos los campos.');
+                return;
+            }
+            if (clave !== 'prueba') {
+                alert('Clave incorrecta.');
+                return;
+            }
+            showScreen(professorPanel);
+            cargarNotasEstudiantes();
+        });
+
+        function cargarNotasEstudiantes() {
+            const participants = JSON.parse(localStorage.getItem('participants')) || [];
+            const tbody = document.querySelector('#grades-table tbody');
+            tbody.innerHTML = '';
+            if (participants.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6">Aún no hay participantes registrados.</td></tr>';
+                return;
+            }
+            participants.forEach(p => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${p.name}</td><td>${p.lastname}</td><td>${p.cedula}</td><td>${p.school || ''}</td><td>${p.score}</td><td></td>`;
+                tbody.appendChild(row);
+            });
+        }
         async function fetchIP() {
             try {
                 const response = await fetch('https://api.ipify.org?format=json');
@@ -130,8 +192,9 @@
             userName = userNameInput.value.trim();
             userLastname = userLastnameInput.value.trim();
             userCedula = userCedulaInput.value.trim();
+            const userSchool = userSchoolInput.value;
 
-            if (!userName || !userLastname || !userCedula) {
+            if (!userName || !userLastname || !userCedula || !userSchool) {
                 alert('Por favor, completa todos los campos correctamente.');
                 return;
             }
@@ -144,8 +207,7 @@
                 return;
             }
 
-            startScreen.style.display = 'none';
-            quizScreen.style.display = 'block';
+            showScreen(quizScreen);
             startQuiz();
         });
 
@@ -359,39 +421,34 @@
         }
 
         function saveParticipantData(score, timeTaken) {
+            const userSchool = userSchoolInput ? userSchoolInput.value : '';
             const newParticipant = {
                 name: userName,
                 lastname: userLastname,
                 cedula: userCedula,
+                school: userSchool,
                 score: score,
                 timeTaken: timeTaken,
                 date: new Date().toLocaleString()
             };
             const participants = JSON.parse(localStorage.getItem('participants')) || [];
             participants.push(newParticipant);
-
             localStorage.setItem('participants', JSON.stringify(participants));
         }
 
         showLeaderboardBtn.addEventListener('click', () => {
-            displayLeaderboard();
-        });
-        function displayLeaderboard() {
             resultsContainer.style.display = 'none';
             leaderboardContainer.style.display = 'block';
             const participants = JSON.parse(localStorage.getItem('participants')) || [];
             leaderboardTableBody.innerHTML = '';
-
             if (participants.length === 0) {
                 leaderboardTableBody.innerHTML = '<tr><td colspan="4">Aún no hay participantes registrados.</td></tr>';
                 return;
             }
-
             participants.forEach((p, index) => {
                 const minutes = Math.floor(p.timeTaken / 60);
                 const seconds = p.timeTaken % 60;
                 const formattedTime = `${minutes} min ${seconds} seg`;
-
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${index + 1}</td>
@@ -401,7 +458,7 @@
                 `;
                 leaderboardTableBody.appendChild(row);
             });
-        }
+        });
 
         // =========================================================================
         // Medidas de seguridad adicionales
