@@ -127,14 +127,14 @@
         }
 
         // Selección de rol
-        document.getElementById('btn-student').addEventListener('click', () => {
+        document.getElementById('btn-student').onclick = function() {
             roleScreen.style.display = 'none';
             startScreen.style.display = 'block';
-        });
-        document.getElementById('btn-professor').addEventListener('click', () => {
+        };
+        document.getElementById('btn-professor').onclick = function() {
             roleScreen.style.display = 'none';
             professorScreen.style.display = 'block';
-        });
+        };
 
         // Acceso profesor
         loginProfessorBtn.addEventListener('click', () => {
