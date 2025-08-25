@@ -297,11 +297,11 @@ body {
         }
         .result-item.correct {
             border-left: 5px solid var(--correct-color);
-            background-color: #cdbfd4;
+            background-color: #d3ced6;
         }
         .result-item.incorrect {
             border-left: 5px solid var(--incorrect-color);
-            background-color: #ffdeff;
+            background-color: #ccc4cc;
         }
         .user-justification-result {
             border-left: 3px solid var(--hover-color);
