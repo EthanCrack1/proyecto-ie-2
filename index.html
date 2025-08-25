@@ -14,16 +14,16 @@
 
     <div class="quiz-container">
         <div class="header-logo" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-            <img src="assets/UC_logo.png" alt="Logo UC" style="height: 70px;">
-            <h1 style="flex: 1; text-align: center; font-family: 'Poppins', sans-serif; font-size: 2em; margin: 0; background: linear-gradient(135deg, #3b82f6, #1e40af); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Quiz: Analizador de Espectro</h1>
+            <img src="assets/UC_logo.png" alt="Logo UC" style="height: 120px;">
+            <h1 style="flex: 1; text-align: center; font-family: 'Poppins', sans-serif; font-size: 2em; margin: 0;">Quiz: Analizador de Espectro</h1>
             <div style="display: flex; gap: 10px;">
-                <img src="assets/ingenieria uc.png" alt="Logo Ingeniería" style="height: 70px;">
-                <img src="assets/telecom.jpg" alt="Logo Telecom" style="height: 70px;">
+                <img src="assets/ingenieria uc.png" alt="Logo Ingeniería" style="height: 120px;">
+                <img src="assets/telecom.jpg" alt="Logo Telecom" style="height: 120px;">
             </div>
         </div>
 
-        <!-- Selección de rol -->
-        <div id="role-screen" class="active">
+    <!-- Selección de rol -->
+    <div id="role-screen" style="display:block;">
             <h2 style="text-align:center; font-family:'Poppins',sans-serif;">Selecciona tu rol</h2>
             <div style="display:flex; justify-content:center; gap:20px; margin-top:30px;">
                 <button id="btn-student" style="flex:1; font-size:1.2em; padding:20px;">👨‍🎓 Estudiante</button>
@@ -31,8 +31,8 @@
             </div>
         </div>
 
-        <!-- Pantalla Estudiante -->
-        <div id="start-screen" style="display:none;">
+    <!-- Pantalla Estudiante -->
+    <div id="start-screen" style="display:none;">
             <p>Bienvenido/a al Examen. Ingresa tus datos para comenzar:</p>
             <div style="display:flex; align-items:center; margin:10px 0;"><span style="margin-right:8px;">👤</span><input type="text" id="user-name" placeholder="Nombre"></div>
             <div style="display:flex; align-items:center; margin:10px 0;"><span style="margin-right:8px;">🧑‍💼</span><input type="text" id="user-lastname" placeholder="Apellido"></div>
@@ -56,8 +56,8 @@
             </div>
         </div>
 
-        <!-- Pantalla Profesor -->
-        <div id="professor-screen" style="display:none;">
+    <!-- Pantalla Profesor -->
+    <div id="professor-screen" style="display:none;">
             <p>Acceso de Profesor</p>
             <div style="display:flex; align-items:center; margin:10px 0;"><span style="margin-right:8px;">🆔</span><input type="text" id="prof-cedula" placeholder="Cédula"></div>
             <div style="display:flex; align-items:center; margin:10px 0;"><span style="margin-right:8px;">🔑</span><input type="password" id="prof-clave" placeholder="Clave de acceso"></div>
