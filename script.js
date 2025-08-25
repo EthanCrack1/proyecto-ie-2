@@ -123,17 +123,15 @@
             professorPanel.style.display = 'none';
             quizScreen.style.display = 'none';
             leaderboardContainer.style.display = 'none';
-            if (screen) screen.style.display = 'block';
+            if (screen) screen.style.display = 'flex';
         }
 
         // Selección de rol
         document.getElementById('btn-student').onclick = function() {
-            roleScreen.style.display = 'none';
-            startScreen.style.display = 'block';
+            showScreen(startScreen);
         };
         document.getElementById('btn-professor').onclick = function() {
-            roleScreen.style.display = 'none';
-            professorScreen.style.display = 'block';
+            showScreen(professorScreen);
         };
 
         // Acceso profesor
