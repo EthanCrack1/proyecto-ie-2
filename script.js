@@ -440,8 +440,13 @@ function displayLeaderboard() {
 document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden' && !quizSubmitted) {
         clearInterval(timerInterval);
+        quizSubmitted = true;
         alert('¡Has salido de la página! El quiz se ha terminado por seguridad.');
         displayResults();
+        // Opcional: Ocultar todas las pantallas excepto resultados
+        if (typeof showScreen === 'function') {
+            showScreen(resultsContainer);
+        }
     }
 });
 document.addEventListener('contextmenu', event => {
