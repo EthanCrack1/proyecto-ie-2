@@ -101,8 +101,8 @@
         const scoreDisplay = document.querySelector('.score-display');
         const leaderboardContainer = document.getElementById('leaderboard');
         const leaderboardTableBody = document.querySelector('#leaderboard-table tbody');
-        const showLeaderboardBtn = document.getElementById('show-leaderboard-btn');
-        const exportBtn = document.getElementById('export-btn');
+    // const showLeaderboardBtn = document.getElementById('show-leaderboard-btn');
+    // const exportBtn = document.getElementById('export-btn');
         
         async function fetchIP() {
             try {
@@ -374,39 +374,39 @@
 
             localStorage.setItem('participants', JSON.stringify(participants));
         }
-
+//-------------------------------------------
         // Event listener para el nuevo botón de exportación
-        exportBtn.addEventListener('click', () => {
-            exportToCSV();
-        });
+    // exportBtn.addEventListener('click', () => {
+    //     exportToCSV();
+    // });
 
-        function exportToCSV() {
-            const participants = JSON.parse(localStorage.getItem('participants')) || [];
-            if (participants.length === 0) {
-                alert('No hay participantes para exportar.');
-                return;
-            }
+    // function exportToCSV() {
+    //     const participants = JSON.parse(localStorage.getItem('participants')) || [];
+    //     if (participants.length === 0) {
+    //         alert('No hay participantes para exportar.');
+    //         return;
+    //     }
 
-            let csvContent = "data:text/csv;charset=utf-8,";
-            csvContent += "Nombre,Apellido,Cedula,Puntuacion,Tiempo (segundos),Fecha\r\n";
+    //     let csvContent = "data:text/csv;charset=utf-8,";
+    //     csvContent += "Nombre,Apellido,Cedula,Puntuacion,Tiempo (segundos),Fecha\r\n";
 
-            participants.forEach(p => {
-                const row = `${p.name},${p.lastname},${p.cedula},${p.score},${p.timeTaken},"${p.date}"`;
-                csvContent += row + "\r\n";
-            });
+    //     participants.forEach(p => {
+    //         const row = `${p.name},${p.lastname},${p.cedula},${p.score},${p.timeTaken},"${p.date}"`;
+    //         csvContent += row + "\r\n";
+    //     });
 
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "resultados_quiz.csv");
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
+    //     const encodedUri = encodeURI(csvContent);
+    //     const link = document.createElement("a");
+    //     link.setAttribute("href", encodedUri);
+    //     link.setAttribute("download", "resultados_quiz.csv");
+    //     document.body.appendChild(link);
+    //     link.click();
+    //     document.body.removeChild(link);
+    // }
 
-        showLeaderboardBtn.addEventListener('click', () => {
-            displayLeaderboard();
-        });
+    // showLeaderboardBtn.addEventListener('click', () => {
+    //     displayLeaderboard();
+    // });
         function displayLeaderboard() {
             resultsContainer.style.display = 'none';
             leaderboardContainer.style.display = 'block';
