@@ -71,9 +71,6 @@ let startTime;
 let timerInterval;
 let ipAddress = 'Cargando...';
 let quizSubmitted = false;
-// Array para almacenar los resultados del quiz actual antes de guardarlos
-let currentQuizResults = [];
-
 // El puntaje por pregunta es de 4 puntos
 const pointsPerQuestion = 4;
 // VARIABLES PARA ALMACENAR LOS DATOS DEL USUARIO
@@ -153,7 +150,6 @@ startQuizBtn.addEventListener('click', () => {
     startQuiz();
 });
 
-// Función para mezclar las preguntas y tomar solo las primeras 5
 function startQuiz() {
     shuffleArray(allQuizData);
     quizData = allQuizData.slice(0, 5);
@@ -177,7 +173,7 @@ function updateTimer() {
 
     const minutes = Math.floor(timeRemaining / 60).toString().padStart(2, '0');
     const seconds = (timeRemaining % 60).toString().padStart(2, '0');
-    timerDisplay.textContent = `⏱️ Tiempo restante: ${minutes}:${seconds}`;
+    timerDisplay.textContent = `Tiempo restante: ${minutes}:${seconds}`;
 }
 
 function loadQuestion() {
@@ -244,7 +240,7 @@ function saveCurrentAnswer() {
     const correctJustificationNormalized = correctJustification.trim().toLowerCase();
 
     // Lógica para verificar justificación con palabras clave
-    const keywords = correctJustificationNormalized.split(/\s+/).filter(word => word.length > 3);
+    const keywords = correctJustificationNormalized.split(' ').filter(word => word.length > 3);
     let isJustificationCorrect = false;
     for (const keyword of keywords) {
         if (userJustificationNormalized.includes(keyword)) {
@@ -258,8 +254,7 @@ function saveCurrentAnswer() {
         answer: selectedOption ? selectedOption.textContent : 'No respondida',
         isCorrect: selectedOption ? selectedOption.textContent === quizData[currentQuestionIndex].correctAnswer : false,
         userJustification: userJustification,
-        isJustificationCorrect: isJustificationCorrect,
-        correctAnswer: quizData[currentQuestionIndex].correctAnswer // Guarda la respuesta correcta para mostrarla después
+        isJustificationCorrect: isJustificationCorrect
     };
 }
 
@@ -303,7 +298,6 @@ function displayResults() {
     if(quizSubmitted) return;
     quizSubmitted = true;
     const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-    currentQuizResults = Object.values(userAnswers);
     const finalScore = calculateScore();
 
     saveParticipantData(finalScore, elapsedTime);
@@ -320,14 +314,14 @@ function displayResults() {
         const isJustificationCorrect = userAnswer && userAnswer.isJustificationCorrect;
 
         let questionScore = 0;
-        let resultClass = '';
+        let resultClass = 'incorrect';
+
         if (isCorrectAnswer && isJustificationCorrect) {
             questionScore = 4;
             resultClass = 'correct';
         } else if (isCorrectAnswer || isJustificationCorrect) {
             questionScore = 2;
-        } else {
-            resultClass = 'incorrect';
+            resultClass = '';
         }
 
         resultsHtml += `
@@ -336,7 +330,7 @@ function displayResults() {
                 <p style="color: ${isCorrectAnswer ? 'var(--correct-color)' : 'var(--incorrect-color)'};">
                     Tu respuesta: <strong>${userAnswer ? userAnswer.answer : 'No respondida'}</strong> ${isCorrectAnswer ? '✔' : '❌'}
                 </p>
-                ${!isCorrectAnswer ? `<p style="color: var(--correct-color);">Respuesta correcta: <strong>${userAnswer.correctAnswer}</strong></p>` : ''}
+                ${!isCorrectAnswer ? `<p style="color: var(--correct-color);">Respuesta correcta: <strong>${q.correctAnswer}</strong></p>` : ''}
 
                 <p class="user-justification-result">
                     <strong>Tu justificación:</strong> ${userAnswer ? userAnswer.userJustification : 'No proporcionada'}
@@ -372,7 +366,7 @@ function saveParticipantData(score, timeTaken) {
         cedula: userCedula,
         score: score,
         timeTaken: timeTaken,
-        date: new Date().toISOString()
+        date: new Date().toLocaleString()
     };
     const participants = JSON.parse(localStorage.getItem('participants')) || [];
     participants.push(newParticipant);
@@ -396,7 +390,7 @@ function exportToCSV() {
     csvContent += "Nombre,Apellido,Cedula,Puntuacion,Tiempo (segundos),Fecha\r\n";
 
     participants.forEach(p => {
-        const row = `"${p.name}","${p.lastname}","${p.cedula}",${p.score},${p.timeTaken},"${p.date}"`;
+        const row = `${p.name},${p.lastname},${p.cedula},${p.score},${p.timeTaken},"${p.date}"`;
         csvContent += row + "\r\n";
     });
 
@@ -412,7 +406,6 @@ function exportToCSV() {
 showLeaderboardBtn.addEventListener('click', () => {
     displayLeaderboard();
 });
-
 function displayLeaderboard() {
     resultsContainer.style.display = 'none';
     leaderboardContainer.style.display = 'block';
@@ -432,26 +425,13 @@ function displayLeaderboard() {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${index + 1}</td>
-            <td>${p.name} ${p.lastname}</td> 
-            
+            <td>${p.name} ${p.lastname}</td>
             <td>${p.score}</td>
             <td>${formattedTime}</td>
         `;
         leaderboardTableBody.appendChild(row);
     });
 }
-
-// Al cargar la página, borra solo los resultados del quiz actual, no todos los participantes
-window.onload = function() {
-    sessionStorage.removeItem('currentQuizResults');
-};
-
-// Antes de cerrar la página o recargar, guarda los resultados actuales
-window.addEventListener('beforeunload', function (e) {
-    if (!quizSubmitted && Object.keys(userAnswers).length > 0) {
-        sessionStorage.setItem('currentQuizResults', JSON.stringify(Object.values(userAnswers)));
-    }
-});
 
 // =========================================================================
 // Medidas de seguridad adicionales
