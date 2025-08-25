@@ -1,86 +1,73 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiz Analizador de Espectro</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Analizador de Espectro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="quiz-container">
-<h1>📡 Quiz: Analizador de Espectro</h1>
 
-<div id="role-screen" class="active">
-<h2>Selecciona tu rol</h2>
-<div class="role-buttons">
-<button id="btn-student">👨‍🎓 Estudiante</button>
-<button id="btn-professor">👨‍🏫 Profesor</button>
-</div>
-</div>
+    <div class="quiz-container">
+        <div class="header-logo">
+            <img src="path/to/tu/logo1.png" alt="Logo Personal 1">
+            <img src="path/to/tu/logo2.png" alt="Logo Personal 2">
+            <img src="path/to/tu/logo3.png" alt="Logo Personal 3">
+        </div>
 
-<div id="start-screen">
-<p>Bienvenido/a al Examen. Ingresa tus datos para comenzar:</p>
-<div class="input-emoji"><span>👤</span><input type="text" id="user-name" placeholder="Nombre"></div>
-<div class="input-emoji"><span>🧑‍💼</span><input type="text" id="user-lastname" placeholder="Apellido"></div>
-<div class="input-emoji"><span>🆔</span><input type="text" id="user-cedula" placeholder="Número de Cédula"></div>
-<div class="input-emoji"><span>🏫</span>
-<select id="user-school">
-<option value="">Selecciona Escuela</option>
-<option value="Eléctrica">Eléctrica ⚡</option>
-<option value="Telecomunicaciones">Telecomunicaciones 📡</option>
-</select>
-</div>
+        <div id="start-screen">
+            <p style="font-weight: bold; font-size: 1.1em;">Analizador de Espectro - Evaluación Virtual</p>
+            <p>Por favor, ingresa tus datos para iniciar el quiz.</p>
+            <input type="text" id="user-name" placeholder="Nombre">
+            <input type="text" id="user-lastname" placeholder="Apellido">
+            <input type="tel" id="user-cedula" placeholder="Número de Cédula">
+            <button id="start-quiz-btn">Iniciar Quiz</button>
+        </div>
 
-<button id="start-quiz-btn">🚀 Iniciar Quiz</button>
+        <div id="quiz-screen" style="display: none;">
+            <div class="quiz-status">
+                <span id="question-counter">Pregunta 1 de 5</span>
+                <span id="timer">Tiempo: 00:00</span>
+            </div>
 
-<div class="warning-box">
-<p><strong>ADVERTENCIA</strong></p>
-<p>1) Si cambias de pestaña o minimizas, el examen termina automáticamente.</p>
-<p>2) Una vez dado al botón “Siguiente”, no puedes retroceder a preguntas anteriores.</p>
-<p>3) Solo se permite un intento.</p>
-<p>4) Asegúrate de responder y justificar cada pregunta; las puntuaciones dependen de la justificación.</p>
-<p>5) El tiempo total del examen es de 30 minutos.</p>
-<p>6) Evita actualizar la página para no perder tu progreso.</p>
-</div>
-</div>
+            <div id="quiz-content">
+            </div>
 
-<div id="professor-screen">
-<p>Acceso de Profesor</p>
-<div class="input-emoji"><span>🆔</span><input type="text" id="prof-cedula" placeholder="Cédula"></div>
-<div class="input-emoji"><span>🔑</span><input type="password" id="prof-clave" placeholder="Clave de acceso"></div>
-<button id="login-professor-btn">Ingresar</button>
-</div>
+            <div class="navigation-buttons">
+                <button id="next-btn">Siguiente</button>
+                <button id="submit-btn">Terminar Quiz</button>
+            </div>
 
-<div id="professor-panel">
-<h2>📊 Notas de Estudiantes</h2>
-<div class="table-container">
-<table id="grades-table">
-<thead>
-<tr>
-<th>Nombre</th><th>Apellido</th><th>Cédula</th><th>Escuela</th><th>Nota</th><th>Acciones</th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>
-</div>
-</div>
 
-<div id="quiz-screen">
-<div class="quiz-status"><span id="question-counter"></span> <span id="timer">Tiempo: 00:00</span></div>
-<div id="quiz-content"></div>
-<button id="next-btn">➡️ Siguiente</button>
-</div>
+            <div id="results" style="display: none;">
+                <h2>Resultados del Quiz</h2>
+                <div class="score-display"></div>
+                <div id="results-details"></div>
+                <button id="export-btn">Exportar a Excel</button>
+                <button id="show-leaderboard-btn">Ver Tabla de Participantes</button>
+            </div>
 
-<div id="results">
-<h2><span>📊</span> Resultados</h2>
-<div class="score-display"></div>
-<div id="results-details"></div>
-</div>
+            <div id="leaderboard" style="display: none;">
+                <h2>Tabla de Participantes</h2>
+                <p>Los participantes se muestran en el orden en que finalizaron el quiz.</p>
+                <table id="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>Posición</th>
+                            <th>Nombre y Apellido</th>
+                            <th>Puntuación</th>
+                            <th>Tiempo</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-</div>
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
