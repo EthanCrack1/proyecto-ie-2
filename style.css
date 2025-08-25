@@ -297,7 +297,7 @@ body {
         }
         .result-item.correct {
             border-left: 5px solid var(--correct-color);
-            background-color: #f0d5ff;
+            background-color: #cdbfd4;
         }
         .result-item.incorrect {
             border-left: 5px solid var(--incorrect-color);
